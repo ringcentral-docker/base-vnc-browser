@@ -1,0 +1,37 @@
+FROM ubuntu
+
+#Essential tools and xvfb
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    software-properties-common \
+    unzip \
+    vim \
+    git \
+    sudo \
+    iputils-ping \
+    curl \
+    wget \
+    xvfb \
+    xauth \
+    x11vnc \
+    x11-utils \
+    x11-xserver-utils  
+
+#Step 2
+#Chrome browser
+ARG CHROME_VERSION=70.0.3538.77
+RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add \
+    && wget http://www.slimjetbrowser.com/chrome/files/$CHROME_VERSION/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome*.deb || true
+RUN apt-get install -y -f \
+    && rm -rf /var/lib/apt/lists/*
+
+#Chrome Driver
+ARG CHROME_DRIVER_VERSION=2.42
+RUN mkdir -p /opt/selenium \
+    && curl http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -o /opt/selenium/chromedriver_linux64.zip \
+    && cd /opt/selenium; unzip /opt/selenium/chromedriver_linux64.zip; rm -rf chromedriver_linux64.zip; ln -fs /opt/selenium/chromedriver /usr/local/bin/chromedriver;
+
+ADD start-vnc.sh /start-vnc.sh
+RUN chmod a+x /start-vnc.sh
+EXPOSE 5999
+ENV DISPLAY :99
