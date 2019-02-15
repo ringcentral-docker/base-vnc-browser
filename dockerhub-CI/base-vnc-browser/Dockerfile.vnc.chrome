@@ -31,7 +31,5 @@ RUN mkdir -p /opt/selenium \
     && curl http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -o /opt/selenium/chromedriver_linux64.zip \
     && cd /opt/selenium; unzip /opt/selenium/chromedriver_linux64.zip; rm -rf chromedriver_linux64.zip; ln -fs /opt/selenium/chromedriver /usr/local/bin/chromedriver;
 
-ADD start-vnc.sh /start-vnc.sh
-RUN chmod a+x /start-vnc.sh
 EXPOSE 5999
 ENV DISPLAY :99
