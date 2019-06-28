@@ -17,14 +17,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     x11-xserver-utils  
 
 #Step 2
-#Chrome browser
-ARG CHROME_VERSION=70.0.3538.77
-RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add \
-    && wget http://www.slimjetbrowser.com/chrome/files/$CHROME_VERSION/google-chrome-stable_current_amd64.deb \
-    && dpkg -i google-chrome*.deb || true
-RUN apt-get install -y -f \
-    && rm -rf /var/lib/apt/lists/*
-
+#Chrome browser and chromedriver
+ARG CHROME_VERSION=75.0.3538.77
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update \
