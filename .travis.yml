@@ -12,7 +12,7 @@ before_script:
 script:
 - docker build -t "$IMAGE_NAME" -f "Dockerfile.vnc.chrome" .
 after_script:
-- version="$(awk -F '[=.]'  '/ARG CHROME_DRIVER_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
+- version="$(awk -F '[.]' '{print $1}' driverInfo.txt)"
 - docker images
 before_deploy:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
