@@ -56,8 +56,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
-ARG CHROME_DRIVER_VERSION=$VERSION
-
 #Step 3
 #Firefox browser
 ARG FIREFOX_VERSION=66.0.3
