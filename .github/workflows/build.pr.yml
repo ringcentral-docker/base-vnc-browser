@@ -20,6 +20,6 @@ jobs:
           cd base-chrome
           IMAGE_NAME=ringcentral/chrome-vnc
           VERSION="chrome$(awk -F '[=.]'  '/ARG CHROME_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
-          docker build -t ${$IMAGE_NAME} -f Dockerfile.vnc.chrome .
+          docker build -t ${IMAGE_NAME} -f Dockerfile.vnc.chrome .
           docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${VERSION}"
           docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
