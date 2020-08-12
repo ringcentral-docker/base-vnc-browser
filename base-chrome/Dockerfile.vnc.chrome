@@ -18,7 +18,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 #Step 2
 #Chrome browser and chromedriver
-ARG CHROME_VERSION=75.0.3538.77
+ARG CHROME_VERSION=83.0.4103.116
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update \

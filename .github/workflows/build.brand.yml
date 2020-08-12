@@ -3,7 +3,7 @@ name: Build and Push Image
 on:
   push:
     branches:
-      - master
+      - chrome83
     paths:
       # '*' matches any character except '/'
       - 'base-chrome/*'
@@ -12,7 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+        with:
+          ref: chrome83      
       - name: Docker login
         env:
           DOCKER_HUB_USERNAME: ${{ secrets. DOCKER_HUB_USERNAME }} 
@@ -26,7 +28,7 @@ jobs:
         run: |
           cd base-chrome
           IMAGE_NAME=ringcentral/chrome-vnc
-          IMAGE_TAG=latest
+          IMAGE_TAG=chrome83
           VERSION="chrome$(awk -F '[=.]'  '/ARG CHROME_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
           docker build -t ${IMAGE_NAME} -f Dockerfile.vnc.chrome .
           docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${VERSION}"
