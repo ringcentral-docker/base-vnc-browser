@@ -26,10 +26,11 @@ jobs:
         run: |
           cd base-chrome
           IMAGE_NAME=ringcentral/chrome-vnc
-          VERSION="chrome$(awk -F '[=.]'  '/ARG CHROME_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
+          Chrome_VERSION="chrome$(awk -F '[=.]'  '/ARG CHROME_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
+          Firefox_VERSION="firefox$(awk -F '[=.]'  '/ARG FIREFOX_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
           docker build -t ${IMAGE_NAME} -f Dockerfile.vnc.chrome .
-          docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${VERSION}"
+          docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${Chrome_VERSION}_${Firefox_VERSION}"
           docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
 
-          docker push "${IMAGE_NAME}:${VERSION}"
+          docker push "${IMAGE_NAME}:${Chrome_VERSION}_${Firefox_VERSION}"
           docker push "${IMAGE_NAME}:latest"
