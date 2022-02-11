@@ -18,7 +18,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 #Step 2
 #Chrome browser and chromedriver
-ARG CHROME_VERSION=75.0.3538.77
+ARG CHROME_VERSION=98.0.4758.80
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update \
@@ -51,8 +51,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     /var/tmp/*
 
 #Step 3
-#Firefox browser
-ARG FIREFOX_VERSION=66.0.3
+#Firefox browser version list (https://ftp.mozilla.org/pub/firefox/releases)
+ARG FIREFOX_VERSION=97.0
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install firefox \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
