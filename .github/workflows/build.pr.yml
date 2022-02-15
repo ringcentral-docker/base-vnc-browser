@@ -22,5 +22,5 @@ jobs:
           Chrome_VERSION="chrome$(awk -F '[=.]'  '/ARG CHROME_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
           Firefox_VERSION="firefox$(awk -F '[=.]'  '/ARG FIREFOX_VERSION/ {print $2}' Dockerfile.vnc.chrome)"
           docker build -t ${IMAGE_NAME} -f Dockerfile.vnc.chrome .
-          docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${Chrome_VERSION}_${Firefox_VERSION}"
+          docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${Chrome_VERSION}-${Firefox_VERSION}"
           docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
