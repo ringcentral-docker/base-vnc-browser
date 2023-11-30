@@ -78,3 +78,8 @@ ADD start-vnc.sh /start-vnc.sh
 RUN chmod a+x /start-vnc.sh
 EXPOSE 5999
 ENV DISPLAY :99
+
+RUN groupadd -g 1000 ubuntu
+RUN useradd -g ubuntu ubuntu 
+RUN mkdir -p /home/ubuntu && chown -R ubuntu:ubuntu /home/ubuntu
+RUN echo 'ubuntu ALL=(ALL) NOPASSWD:ALL'>>/etc/sudoers
