@@ -14,11 +14,11 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     xauth \
     x11vnc \
     x11-utils \
-    x11-xserver-utils  
+    x11-xserver-utils
 
 #Step 2
 #Chrome browser and chromedriver
-ARG CHROME_VERSION=119.0.6045.159
+ARG CHROME_VERSION=144.0.7559.109
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update \
@@ -51,11 +51,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     /var/tmp/*
 
 #Step 3
-#Firefox browser version list (https://ftp.mozilla.org/pub/firefox/releases)
-ARG FIREFOX_VERSION=119.0.1
+#Firefox browser version list (https://ftp.mozilla.org/pub/firefox/releases/)
+ARG FIREFOX_VERSION=145.0.1
 ENV FF_DIR /dist
 RUN apt update -y && apt upgrade -y && apt install -y libgtk-3-common libasound2 libdbus-glib-1-2
-RUN mkdir -p $FF_DIR && cd $FF_DIR && wget -O - https://ftp.mozilla.org/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 | tar -xjf -
+RUN mkdir -p $FF_DIR && cd $FF_DIR && wget -O - https://ftp.mozilla.org/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.xz | tar -xJvf -
 ENV PATH $FF_DIR/firefox:$PATH
 
 #GeckoDriver
@@ -74,6 +74,6 @@ EXPOSE 5999
 ENV DISPLAY :99
 
 RUN groupadd -g 1000 ubuntu
-RUN useradd -g ubuntu ubuntu 
+RUN useradd -g ubuntu ubuntu
 RUN mkdir -p /home/ubuntu && chown -R ubuntu:ubuntu /home/ubuntu
 RUN echo 'ubuntu ALL=(ALL) NOPASSWD:ALL'>>/etc/sudoers
